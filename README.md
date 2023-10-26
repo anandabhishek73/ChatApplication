@@ -8,7 +8,7 @@ present before you a seamless click and run experience
 
 The project requires following prerequisites on the machine
  - `Java 21` or above 
- - `Docker Desktop` , Up and Running
+ - `Docker Desktop Engine` `v22`+ , Up and Running
 
 ## Configurations
 Before the initial run, do check and tune the project properties, mentioned in the section below, 
@@ -39,5 +39,6 @@ and will also create the database for this application. The same will not happen
 Therefore, in case of any mishap or corruption, carefully teardown the container stack and
 simply run the maven build command again.
 
-
+For more info on how the docker setup works internally with String Boot, please read
+[this blog](https://spring.io/blog/2023/06/21/docker-compose-support-in-spring-boot-3-1) post
 
