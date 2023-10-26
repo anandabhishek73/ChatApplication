@@ -20,8 +20,8 @@ import java.util.Objects;
 @Table(name = "chat_message", indexes = {
         @Index(name = "idx_chatmessage_created_at", columnList = "created_at"),
         @Index(name = "idx_chatmessage_seen_at", columnList = "seen_at"),
-        @Index(name = "idx_chatmessage_from_user", columnList = "from_user"),
-        @Index(name = "idx_chatmessage_to_user", columnList = "to_user")
+        @Index(name = "idx_chatmessage_from_user", columnList = "from_user_id"),
+        @Index(name = "idx_chatmessage_to_user", columnList = "to_user_id")
 })
 public class ChatMessage {
 
@@ -29,13 +29,15 @@ public class ChatMessage {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "from_user", nullable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "from_user_id", nullable = false, updatable = false)
     private ChatUser fromUser;
 
-    @Column(name = "to_user", nullable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "to_user_id", nullable = false, updatable = false)
     private ChatUser toUser;
 
-    @Column(name = "message", nullable = false)
+    @Column(name = "message", length = 2048, columnDefinition = "TEXT")
     private String message;
 
     @Version

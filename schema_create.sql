@@ -1,0 +1,14 @@
+create table chat_message (version tinyint(4) default 0, created_at datetime(6), edited_at datetime(6), from_user_id bigint not null, id bigint not null, seen_at datetime(6), to_user_id bigint not null, message TEXT, primary key (id)) engine=InnoDB;
+create table chat_message_seq (next_val bigint) engine=InnoDB;
+insert into chat_message_seq values ( 1 );
+create table customer (version tinyint(4) default 0, created_at datetime(6), id bigint not null, updated_at datetime(6), first_name varchar(54) not null, last_name varchar(54), username varchar(54) not null, primary key (id)) engine=InnoDB;
+create table customer_seq (next_val bigint) engine=InnoDB;
+insert into customer_seq values ( 1 );
+create index idx_chatmessage_created_at on chat_message (created_at);
+create index idx_chatmessage_seen_at on chat_message (seen_at);
+create index idx_chatmessage_from_user on chat_message (from_user_id);
+create index idx_chatmessage_to_user on chat_message (to_user_id);
+create index idx_chatuser_username on customer (username);
+alter table customer add constraint UK_irnrrncatp2fvw52vp45j7rlw unique (username);
+alter table chat_message add constraint FKothooohm7hu6q30cskrkxsspk foreign key (from_user_id) references customer (id);
+alter table chat_message add constraint FKq9qddiepweoymoqahv074wu9k foreign key (to_user_id) references customer (id);
